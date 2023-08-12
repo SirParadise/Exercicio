@@ -1,0 +1,41 @@
+import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var usernameEditText: EditText
+    private lateinit var passwordEditText: EditText
+    private lateinit var loginButton: Button
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        usernameEditText = findViewById(R.id.usernameEditText)
+        passwordEditText = findViewById(R.id.passwordEditText)
+        loginButton = findViewById(R.id.loginButton)
+
+        loginButton.setOnClickListener {
+            val username = usernameEditText.text.toString()
+            val password = passwordEditText.text.toString()
+
+            if (isValidLogin(username, password)) {
+                // Successful login
+                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
+            } else {
+                // Invalid login
+                Toast.makeText(this, "Invalid login credentials", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun isValidLogin(username: String, password: String): Boolean {
+        // Implement your login validation logic here
+        // For demonstration purposes, let's assume any non-empty username and password is valid
+        return username.isNotEmpty() && password.isNotEmpty()
+    }
+}
